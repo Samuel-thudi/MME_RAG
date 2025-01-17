@@ -1,0 +1,25 @@
+install pyenv
+use pyenv to install a python version 
+> pyenv install 3.12.8
+
+install virtual env using pip
+> pip install virtualenv
+
+use pyenv to set 3.12.8 to global
+> pyenv global 3.12.8   
+
+create an env using virtualenv
+> virtualenv <env_name> 
+
+activate the env
+<env_name>\Scripts\activate
+
+pip install clip torch pillow faiss-cpu numpy git+https://github.com/openai/CLIP.git openai
+
+mme_rag openai key: 
+get it from .gitignore file 
+
+best practices to set openai key
+https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety
+
+
