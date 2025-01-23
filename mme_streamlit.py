@@ -24,6 +24,7 @@ model, preprocess = clip.load("ViT-B/32", device=device)
 
 
 def image_query(query, image_path):
+    print(image_path,'*'*100)
     response = client.chat.completions.create(
         model='gpt-4o-mini-2024-07-18',
         messages=[
@@ -143,6 +144,7 @@ if uploaded_image is not None:
             """
 
             # Generate response (placeholder for now)
+            st.write(image_path)
             response = image_query('Write a short label of what is show in this image?', image_path)
             st.subheader("AI Response")
             st.write(response)
