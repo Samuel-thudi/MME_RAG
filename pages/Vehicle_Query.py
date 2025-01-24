@@ -72,18 +72,18 @@ st.title("Vehicle Inspection App")
 
 # File uploader
 uploaded_file = st.file_uploader("Upload a vehicle image", type=["jpg", "jpeg", "png"])
-# Save the uploaded file temporarily
-temp_dir = r"\temp"
-os.makedirs(temp_dir, exist_ok=True)
-file_path = os.path.join(temp_dir, uploaded_file.name)
-
-with open(file_path, "wb") as f:
-    f.write(uploaded_file.getbuffer())
-
-# Encode the image
-image_base64 = image_encoding(file_path)  # Pass BytesIO directly
 
 if uploaded_file:
+    # Save the uploaded file temporarily
+    temp_dir = r"\temp"
+    os.makedirs(temp_dir, exist_ok=True)
+    file_path = os.path.join(temp_dir, uploaded_file.name)
+
+    with open(file_path, "wb") as f:
+        f.write(uploaded_file.getbuffer())
+
+    # Encode the image
+    image_base64 = image_encoding(file_path)  # Pass BytesIO directly
     
     # Display the uploaded image
     st.image(file_path, caption="Uploaded Vehicle Image", use_container_width =True)

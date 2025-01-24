@@ -16,7 +16,8 @@ import tempfile
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 
 # Load environment variables
-load_dotenv(Path(".git/.env"))
+# load_dotenv(Path(".git/.env"))
+load_dotenv(Path(__file__).resolve().parent.parent / ".git" / ".env")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Load the CLIP model

@@ -10,12 +10,13 @@ import os
 import numpy as np
 import base64
 import openai
-import openai
-
+from openai import OpenAI
+client = OpenAI()
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 
 # Load environment variables
-load_dotenv(Path(".git/.env"))
+# load_dotenv(Path(".git/.env"))
+load_dotenv(Path(__file__).resolve().parent.parent / ".git" / ".env")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Load the CLIP model
@@ -100,9 +101,17 @@ index, image_paths = initialize_faiss_index(image_database_dir)
 
 # Display uploaded image
 if uploaded_image is not None:
+    
     st.image(uploaded_image, caption="Uploaded Image", use_container_width=True)
     image = Image.open(uploaded_image).convert("RGB")
 
+    # Save the uploaded image to a folder called 'temp' with its original name
+    temp_folder = "temp"
+    os.makedirs(temp_folder, exist_ok=True)  # Create the folder if it doesn't exist
+    temp_image_path = os.path.join(temp_folder, uploaded_image.name)
+    image.save(temp_image_path)
+    image_path = temp_image_path  # Set image_path for the uploaded file
+    
     # Extract features from the uploaded image
     query_features = get_features_from_image(image)
 
@@ -144,7 +153,6 @@ if uploaded_image is not None:
             """
 
             # Generate response (placeholder for now)
-            st.write(image_path)
             response = image_query('Write a short label of what is show in this image?', image_path)
             st.subheader("AI Response")
             st.write(response)
